@@ -1,0 +1,26 @@
+#checkout{
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+#flecha{
+    margin-left: 80%;
+}
+
+.texto h1{
+    text-align: center;
+    
+}
+#content{
+    text-align: center;
+}
+#content video{
+    margin: auto;
+}
+
+
+
+
+
