@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<!--
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/aspect-ratio'),
+    ],
+  }
+  ```
+-->
+{% block content %}
+
+<!--
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/aspect-ratio'),
+    ],
+  }
+  ```
+-->
+
+<link rel="stylesheet" href="{% static 'css/lessons.css' %}">
+<link rel="stylesheet" href="{% static 'js/lessons.js' %}">
+
+<h1 class="text-8x1 font-bold text-center text-gray-800 mb-4">Es hora de aprender!!</h1>
+
+
+
+
+
+<div class="relative">
+  <img src="{% static 'portada.png' %}" alt="Portada del Curso" class="w-full h-64 object-cover rounded">
+  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+  <div class="absolute inset-0 flex items-center justify-center">
+    <h1 class="text-white text-4xl font-bold">Bienvenido a Tu Curso</h1>
+  </div>
+</div>
+
+
+
+<div class="bg-white">
+
+
+
+  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+
+
+
+
+    <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+      {% for curso in lessons %}
+
+      <div class="group relative">
+        <div id="thumbnail" class="w-70 h-50 overflow-hidden rounded-lg shadow-md">
+          <img src="{{curso.thumbnail.url}}" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover">
+          <div class="contenido">
+            <div>
+              <h3 class="text-sm text-gray-700">
+                <a href="{% url 'curso-detail' curso.id %}">
+                  <span aria-hidden="true" class="absolute inset-0"></span>
+                  {{curso.name}}
+                </a>
+              </h3>
+            </div>
+            <p class="text-sm font-medium text-aqua-900">${{curso.price}}</p>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-1 px-2 ">View details</button>
+          </div>
+        </div>
+        
+      </div>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+{% endblock %}

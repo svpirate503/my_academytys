@@ -1,0 +1,217 @@
+
+
+
+
+
+
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!--
+  This example requires updating your template:
+
+  ```
+  <html class="h-full bg-gray-100">
+  <body class="h-full">
+  ```
+-->
+<link rel="stylesheet" href="{% static 'course_detail.css' %}">
+<link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+
+<div class="min-h-full">
+  
+  
+    <header class="bg-white shadow">
+      <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+       <!-- <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{curso.name}}</h1> <a href="#"><span><i id="flecha" class="fa-solid fa-right-long"></i> next lesson</span></a>-->
+      </div>
+    </header>
+    <main>
+      <div id="content" class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{{leccion.leccion_name}}</h2>
+
+        <video controls>
+            <source src="{{leccion.video_url}}" type="video/mp4">
+        </video>
+
+        
+      </div>
+     
+    </main>
+  </div>
+
+<!-- Nuevo codigo udemy -->
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tu Curso</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .toggle {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Barra de navegación -->
+  <nav class="bg-blue-600 p-4 text-white">
+    <!-- Contenido de la barra de navegación -->
+  </nav>
+
+  <!-- Contenedor principal -->
+  <div class="container mx-auto mt-8">
+
+    <!-- Sección del curso -->
+    <section class="bg-white p-8 rounded shadow-md">
+      <h2 class="text-3xl font-bold mb-4">{{curso.name}}</h2>
+
+      <!-- Lista de capítulos -->
+      <ul class="divide-y divide-gray-300">
+        <!-- Capítulo 1 -->
+        {% for capitulo  in curso.capitulo_set.all %}
+
+        <li class="py-4">
+          <div class="flex items-center justify-between cursor-pointer" onclick="toggleLessons('{{capitulo.id}}')">
+            <h3 class="text-xl font-bold">Capítulo 1: {{capitulo.title}}</h3>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              class="h-5 w-5 transform" id="arrow">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+          <!-- Lista de lecciones (inicialmente oculta) -->
+          <ul id="{{capitulo.id}}" class="toggle pl-4">
+            {% for leccion in capitulo.leccion_set.all %}
+
+            <a href="{% url 'ver-video' curso.id leccion.id %}"><p class="mt-1 text-lg leading-8 text-gray-600">{{leccion.leccion_name}}</p></a>
+
+            {% endfor %}
+            <!-- Agrega más lecciones según sea necesario -->
+          </ul>
+        </li>
+        {% endfor %}
+
+    
+        <!-- Agrega más capítulos según sea necesario -->
+
+      </ul>
+    </section>
+
+  </div>
+
+  <script>
+    function toggleLessons(chapterId) {
+      const lessons = document.getElementById(chapterId);
+      lessons.classList.toggle('toggle');
+
+      const arrow = document.getElementById('arrow' + chapterId.substr(-1));
+      arrow.classList.toggle('rotate-180');
+    }
+  </script>
+
+</body>
+</html>
+
+
+  
+
+
+  <!--
+  <div id="content" class="bg-white py-24 sm:py-32">
+    <div id="content" class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl sm:text-center">
+        <h1 id="contenido" class="text-3xl font-bold tracking-tight text-gray-900 sm:text-1xl">Contenido</h1>
+
+        {% for capitulo  in curso.capitulo_set.all %}
+        <h1 id="clickable" class="text-3xl font-bold tracking-tight text-gray-900 sm:text-1xl">{{capitulo.title}}</h1>
+        <div class="subtitles">
+            {% for leccion in capitulo.leccion_set.all %}
+
+            <a href="{% url 'ver-video' curso.id leccion.id %}"><p class="mt-1 text-lg leading-8 text-gray-600">{{leccion.leccion_name}}</p></a>
+            {% endfor %}
+
+
+
+
+        </div>
+
+        {% endfor %}
+      </div>
+    
+     
+     
+      
+      </div>
+    </div>
+  </div>
+  
+-->
+<script>
+const titles = document.querySelectorAll('#clickable');
+
+titles.forEach(title => {
+  title.addEventListener('click', () => {
+    const subtitles = title.nextElementSibling.querySelectorAll("p");
+    subtitles.forEach(subtitle => {
+
+        if(subtitle.style.display === 'none' || subtitle.style.display === ''){
+            subtitle.style.display = 'block';
+        }else{
+            subtitle.style.display = 'none';
+        }
+    });
+  });
+});
+
+</script>
+<style>
+
+    @media screen and(max-width:638px){
+        #content{
+            justify-content: center;
+        }
+    }
+
+.subtitles p{
+    display: none;
+
+}
+#contenido{
+    color: rgb(47, 211, 211);
+    margin-bottom: 10px;
+}
+#clickable{
+    font-weight: normal;
+    color: black;
+    flex:1;;
+    max-width:60rem;
+    text-decoration: underline;
+}
+
+#content{
+    box-shadow: 2px,2px,2px,2px rgba(0, 0,0,0.5);
+    font-family: var(--font-stack-text);
+    font-weight: 400;
+    line-height: 1.4;
+    font-size: 1.6rem;
+    color: #2d2f31;
+}
+</style>
+
+
+{% endblock %}
+
+
+
+
+
+
