@@ -1,0 +1,36 @@
+.acordes{
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0,0.3);
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.acordes button{
+    background-color: rgb(71, 71, 252);
+    color: white;
+    padding: 10px;
+    border: none;
+    margin-left: 10px;
+    border-radius: 3px;
+}
+
+.formulario{
+    text-align: center;
+}
+
+.inputs{
+    display: flex;
+    flex-direction:column ;
+    font-size: 20px;
+    width: 40%;
+    margin: auto;
+}
+.inputs button{
+    margin-top: 10px;
+}
+
+#titulo{
+    color: rgb(201, 15, 15);
+}
+
+.inputs label{
+    color: rgb(161, 8, 8);
+}
